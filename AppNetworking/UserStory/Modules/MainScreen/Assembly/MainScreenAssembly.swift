@@ -14,7 +14,10 @@ public final class MainScreenAssembly {
     /// - Returns: собранный модуль
     public func createModule() -> MainScreenModule {
         
-        let interactor = MainScreenInteractor()
+        let services = URLSessionRequestPerformer()
+        let mainScreenServices = MainScreenServicesImpl(services)
+        
+        let interactor = MainScreenInteractor(mainScreenServices: mainScreenServices)
         let view = MainScreenView()
         let factory = MainScreenFactory()
         

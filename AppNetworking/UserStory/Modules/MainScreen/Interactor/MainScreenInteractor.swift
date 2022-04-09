@@ -27,7 +27,19 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     
     weak var output: MainScreenInteractorOutput?
     
+    private let mainScreenServices: MainScreenServices
+    
+    init(mainScreenServices: MainScreenServices) {
+        self.mainScreenServices = mainScreenServices
+    }
+    
     func getContent() {
+        mainScreenServices.getContent { result in
+            switch result {
+            case .success(let news): print("")
+            case .failure: break
+            }
+        }
         let appearance = Appearance()
         output?.didReceive(text: appearance.someText)
     }
